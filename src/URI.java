@@ -44,9 +44,14 @@ public class URI {
         scheme = cropToMarker(fullUri, SCHEME_MARKER);
     }
 
+    private int getSchemeEndIndex() {
+        return scheme.length() + SCHEME_MARKER.length();
+    }
+
     private void parseAuthority() {
         String marker = AUTHORITY_MARKER;
         int startMarker = fullUri.indexOf(marker);
+
         if (startMarker == -1) {
             authority = NO_COMPONENT_FOUND;
         } else {
@@ -56,11 +61,7 @@ public class URI {
     }
 
     private void parsePath() {
-        int startMarker = scheme.length() + SCHEME_MARKER.length();
-
-        if (hasAuthority()) {
-            startMarker += AUTHORITY_MARKER.length() + authority.length();
-        }
+        int startMarker = getPathStartIndex();
 
         String trimmedUri = fullUri.substring(startMarker);
         int endMarker = trimmedUri.indexOf(QUERY_MARKER);
@@ -71,6 +72,16 @@ public class URI {
             path = cropToMarker(trimmedUri, QUERY_MARKER);
         }
 
+    }
+
+    private int getPathStartIndex() {
+        int index = getSchemeEndIndex();
+
+        if (hasAuthority()) {
+            index += AUTHORITY_MARKER.length() + authority.length();
+        }
+
+        return index;
     }
 
     private String cropToMarker(String uncropped, String marker) {
