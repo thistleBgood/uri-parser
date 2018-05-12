@@ -31,9 +31,7 @@ public class URI {
     }
 
     private void parseScheme() {
-        String marker = ":";
-        int endMarker = fullUri.indexOf(marker);
-        scheme = fullUri.substring(0, endMarker);
+        scheme = cropToMarker(fullUri, ":");
     }
 
     private void parseAuthority() {
@@ -43,9 +41,12 @@ public class URI {
             authority = NO_COMPONENT_FOUND;
         } else {
             String trimmedUri = fullUri.substring(startMarker + marker.length());
-            String newMarker = "/";
-            int endMarker = trimmedUri.indexOf(newMarker);
-            authority = trimmedUri.substring(0, endMarker);
+            authority = cropToMarker(trimmedUri, "/");
         }
+    }
+
+    private String cropToMarker(String uncropped, String marker) {
+        int endMarker = uncropped.indexOf(marker);
+        return uncropped.substring(0, endMarker);
     }
 }
