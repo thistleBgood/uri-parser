@@ -17,15 +17,15 @@ public class URITest {
     private static final String TELNET = "telnet://192.0.2.16:80/";
     private static final String URN = "urn:oasis:names:specification:docbook:dtd:xml:4.1.2";
 
-    private Map<String, String> items;
+    private Map<String, String> scenarios;
 
     @Before
     public void setup_data_holder() {
-        items = new HashMap<>();
+        scenarios = new HashMap<>();
     }
 
     private void add_scenario(String testValue, String result) {
-        items.put(testValue, result);
+        scenarios.put(testValue, result);
     }
 
     @Test
@@ -39,8 +39,8 @@ public class URITest {
         add_scenario(TELNET, "telnet");
         add_scenario(URN, "urn");
 
-        for(String uri : items.keySet()) {
-            String scheme = items.get(uri);
+        for(String uri : scenarios.keySet()) {
+            String scheme = scenarios.get(uri);
             assertScheme(uri, scheme);
         }
     }
