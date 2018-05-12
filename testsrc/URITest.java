@@ -1,5 +1,8 @@
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -9,14 +12,17 @@ public class URITest {
     private static final String HTTPS = "https://john.doe@www.example.com:123/forum/questions/?tag=networking&order=newest#top";
 
     @Test
-    public void uri_extracts_scheme_1() {
-        assertScheme(SCHEME, "scheme");
+    public void uri_extracts_scheme() {
+        Map<String, String> items = new HashMap<>();
+        items.put(SCHEME, "scheme");
+        items.put(HTTPS, "https");
+
+        for(String uri : items.keySet()) {
+            String scheme = items.get(uri);
+            assertScheme(uri, scheme);
+        }
     }
 
-    @Test
-    public void uri_extracts_scheme_2() {
-        assertScheme(HTTPS, "https");
-    }
 
     private void assertScheme(String unprocessedUri, String scheme) {
         URI uri = new URI(unprocessedUri);
