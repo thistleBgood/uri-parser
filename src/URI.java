@@ -58,7 +58,7 @@ public class URI {
     private void parsePath() {
         int startMarker = scheme.length() + SCHEME_MARKER.length();
 
-        if (!authority.equals(NO_COMPONENT_FOUND)) {
+        if (hasAuthority()) {
             startMarker += AUTHORITY_MARKER.length() + authority.length();
         }
 
@@ -76,5 +76,9 @@ public class URI {
     private String cropToMarker(String uncropped, String marker) {
         int endMarker = uncropped.indexOf(marker);
         return uncropped.substring(0, endMarker);
+    }
+
+    public boolean hasAuthority() {
+        return (!authority.equals(NO_COMPONENT_FOUND));
     }
 }

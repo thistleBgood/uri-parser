@@ -17,14 +17,14 @@ public class URITest {
     private static final String TELNET = "telnet://192.0.2.16:80/";
     private static final String URN = "urn:oasis:names:specification:docbook:dtd:xml:4.1.2";
 
-    private Map<String, String> scenarios;
+    private Map<String, Object> scenarios;
 
     @Before
     public void setup_data_holder() {
         scenarios = new HashMap<>();
     }
 
-    private void add_scenario(String testValue, String result) {
+    private void add_scenario(String testValue, Object result) {
         scenarios.put(testValue, result);
     }
 
@@ -40,11 +40,31 @@ public class URITest {
         add_scenario(URN, "urn");
 
         scenarios.keySet().forEach(unprocessedUri -> {
-            String expectedScheme = scenarios.get(unprocessedUri);
+            Object expectedScheme = scenarios.get(unprocessedUri);
             URI uri = new URI(unprocessedUri);
             String processedScheme = uri.getScheme();
             assertThat(processedScheme, is(equalTo(expectedScheme)));
         });
+    }
+
+    @Test
+    public void uri_checks_whether_authority_exists() {
+        add_scenario(SCHEME, true);
+        add_scenario(HTTPS, true);
+        add_scenario(LDAP, true);
+        add_scenario(MAILTO, false);
+        add_scenario(NEWS, false);
+        add_scenario(TEL, false);
+        add_scenario(TELNET, true);
+        add_scenario(URN, false);
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            Object expectedAuthority = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            boolean parsedAuthority = uri.hasAuthority();
+            assertThat(parsedAuthority, is(equalTo(expectedAuthority)));
+        });
+
     }
 
     @Test
@@ -61,7 +81,7 @@ public class URITest {
         add_scenario(URN, NO_AUTHORITY);
 
         scenarios.keySet().forEach(unprocessedUri -> {
-            String expectedAuthority = scenarios.get(unprocessedUri);
+            Object expectedAuthority = scenarios.get(unprocessedUri);
             URI uri = new URI(unprocessedUri);
             String parsedAuthority = uri.getAuthority();
             assertThat(parsedAuthority, is(equalTo(expectedAuthority)));
@@ -80,7 +100,7 @@ public class URITest {
         add_scenario(URN, "oasis:names:specification:docbook:dtd:xml:4.1.2");
 
         scenarios.keySet().forEach(unprocessedUri -> {
-            String expectedPath = scenarios.get(unprocessedUri);
+            Object expectedPath = scenarios.get(unprocessedUri);
             URI uri = new URI(unprocessedUri);
             String parsedPath = uri.getPath();
             assertThat(parsedPath, is(equalTo(expectedPath)));
