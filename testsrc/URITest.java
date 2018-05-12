@@ -46,4 +46,26 @@ public class URITest {
             assertThat(processedScheme, is(equalTo(expectedScheme)));
         });
     }
+
+    @Test
+    public void uri_extracts_authority() {
+        String NO_AUTHORITY = "";
+
+        add_scenario(SCHEME, "authority");
+        add_scenario(HTTPS, "john.doe@www.example.com:123");
+        add_scenario(LDAP, "[2001:db8::7]");
+        add_scenario(MAILTO, NO_AUTHORITY);
+        add_scenario(NEWS, NO_AUTHORITY);
+        add_scenario(TEL, NO_AUTHORITY);
+        add_scenario(TELNET, "192.0.2.16:80");
+        add_scenario(URN, NO_AUTHORITY);
+
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            String expectedAuthority = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            String parsedAuthority = uri.getAuthority();
+            assertThat(parsedAuthority, is(equalTo(expectedAuthority)));
+        });
+    }
 }
