@@ -10,15 +10,16 @@ public class URITest {
 
     @Test
     public void uri_extracts_scheme_1() {
-        String unprocessedUri = SCHEME;
-        URI uri = new URI(unprocessedUri);
-        assertThat(uri.getScheme(), is(equalTo("scheme")));
+        assertScheme(SCHEME, "scheme");
     }
 
     @Test
     public void uri_extracts_scheme_2() {
-        String unprocessedUri = HTTPS;
+        assertScheme(HTTPS, "https");
+    }
+
+    private void assertScheme(String unprocessedUri, String scheme) {
         URI uri = new URI(unprocessedUri);
-        assertThat(uri.getScheme(), is(equalTo("https")));
+        assertThat(uri.getScheme(), is(equalTo(scheme)));
     }
 }
