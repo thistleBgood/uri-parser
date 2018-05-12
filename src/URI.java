@@ -10,16 +10,19 @@
  * (brackets indicate optional components)
  */
 public class URI {
+    private static final String SCHEME_MARKER = ":";
     private static final String NO_COMPONENT_FOUND = "";
 
     private String fullUri;
     private String scheme;
     private String authority;
+    private String path;
 
     public URI(String uri) {
         fullUri = uri;
         parseScheme();
         parseAuthority();
+        parsePath();
     }
 
     public String getScheme() {
@@ -30,8 +33,12 @@ public class URI {
         return authority;
     }
 
+    public String getPath() {
+        return path;
+    }
+
     private void parseScheme() {
-        scheme = cropToMarker(fullUri, ":");
+        scheme = cropToMarker(fullUri, SCHEME_MARKER);
     }
 
     private void parseAuthority() {
@@ -42,6 +49,15 @@ public class URI {
         } else {
             String trimmedUri = fullUri.substring(startMarker + marker.length());
             authority = cropToMarker(trimmedUri, "/");
+        }
+    }
+
+    private void parsePath() {
+        int startMarker = scheme.length() + SCHEME_MARKER.length();
+        if (authority.equals(NO_COMPONENT_FOUND)) {
+            path = fullUri.substring(startMarker);
+        } else {
+            path = "/";
         }
     }
 

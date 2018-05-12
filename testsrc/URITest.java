@@ -67,4 +67,20 @@ public class URITest {
             assertThat(parsedAuthority, is(equalTo(expectedAuthority)));
         });
     }
+
+    @Test
+    public void uri_extracts_path() {
+        add_scenario(MAILTO, "John.Doe@example.com");
+        add_scenario(NEWS, "comp.infosystems.www.servers.unix");
+        add_scenario(TEL, "+1-816-555-1212");
+        add_scenario(TELNET, "/");
+        add_scenario(URN, "oasis:names:specification:docbook:dtd:xml:4.1.2");
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            String expectedPath = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            String parsedPath = uri.getPath();
+            assertThat(parsedPath, is(equalTo(expectedPath)));
+        });
+    }
 }
