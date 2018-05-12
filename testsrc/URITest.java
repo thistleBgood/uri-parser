@@ -60,7 +60,6 @@ public class URITest {
         add_scenario(TELNET, "192.0.2.16:80");
         add_scenario(URN, NO_AUTHORITY);
 
-
         scenarios.keySet().forEach(unprocessedUri -> {
             String expectedAuthority = scenarios.get(unprocessedUri);
             URI uri = new URI(unprocessedUri);
