@@ -70,6 +70,9 @@ public class URITest {
 
     @Test
     public void uri_extracts_path() {
+        add_scenario(SCHEME, "/path");
+        add_scenario(HTTPS, "/forum/questions/");
+        add_scenario(LDAP, "/c=GB");
         add_scenario(MAILTO, "John.Doe@example.com");
         add_scenario(NEWS, "comp.infosystems.www.servers.unix");
         add_scenario(TEL, "+1-816-555-1212");

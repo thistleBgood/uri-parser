@@ -54,11 +54,20 @@ public class URI {
 
     private void parsePath() {
         int startMarker = scheme.length() + SCHEME_MARKER.length();
-        if (authority.equals(NO_COMPONENT_FOUND)) {
-            path = fullUri.substring(startMarker);
-        } else {
-            path = "/";
+
+        if (!authority.equals(NO_COMPONENT_FOUND)) {
+            startMarker += 2 + authority.length();
         }
+
+        String trimmedUri = fullUri.substring(startMarker);
+        int endMarker = trimmedUri.indexOf("?");
+
+        if (endMarker == -1) {
+            path = trimmedUri;
+        } else {
+            path = cropToMarker(trimmedUri, "?");
+        }
+
     }
 
     private String cropToMarker(String uncropped, String marker) {
