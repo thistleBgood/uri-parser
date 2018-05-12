@@ -11,6 +11,9 @@
  */
 public class URI {
     private static final String SCHEME_MARKER = ":";
+    private static final String AUTHORITY_MARKER = "//";
+    private static final String QUERY_MARKER = "?";
+
     private static final String NO_COMPONENT_FOUND = "";
 
     private String fullUri;
@@ -42,7 +45,7 @@ public class URI {
     }
 
     private void parseAuthority() {
-        String marker = "//";
+        String marker = AUTHORITY_MARKER;
         int startMarker = fullUri.indexOf(marker);
         if (startMarker == -1) {
             authority = NO_COMPONENT_FOUND;
@@ -56,16 +59,16 @@ public class URI {
         int startMarker = scheme.length() + SCHEME_MARKER.length();
 
         if (!authority.equals(NO_COMPONENT_FOUND)) {
-            startMarker += 2 + authority.length();
+            startMarker += AUTHORITY_MARKER.length() + authority.length();
         }
 
         String trimmedUri = fullUri.substring(startMarker);
-        int endMarker = trimmedUri.indexOf("?");
+        int endMarker = trimmedUri.indexOf(QUERY_MARKER);
 
         if (endMarker == -1) {
             path = trimmedUri;
         } else {
-            path = cropToMarker(trimmedUri, "?");
+            path = cropToMarker(trimmedUri, QUERY_MARKER);
         }
 
     }
