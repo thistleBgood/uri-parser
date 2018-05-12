@@ -39,14 +39,11 @@ public class URITest {
         add_scenario(TELNET, "telnet");
         add_scenario(URN, "urn");
 
-        scenarios.keySet().forEach(uri -> {
-            String scheme = scenarios.get(uri);
-            assertScheme(uri, scheme);
+        scenarios.keySet().forEach(unprocessedUri -> {
+            String expectedScheme = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            String processedScheme = uri.getScheme();
+            assertThat(processedScheme, is(equalTo(expectedScheme)));
         });
-    }
-
-    private void assertScheme(String unprocessedUri, String scheme) {
-        URI uri = new URI(unprocessedUri);
-        assertThat(uri.getScheme(), is(equalTo(scheme)));
     }
 }
