@@ -1,5 +1,6 @@
 package io.thistlebgood.uri;
 
+import static io.thistlebgood.uri.URIConstants.*;
 /**
  * The URI generic syntax consists of a hierarchical sequence of five components:
  *
@@ -12,13 +13,6 @@ package io.thistlebgood.uri;
  * (brackets indicate optional components)
  */
 public class URI {
-    private static final String SCHEME_MARKER = ":";
-    private static final String AUTHORITY_MARKER = "//";
-    private static final String QUERY_MARKER = "?";
-    private static final String FRAGMENT_MARKER = "#";
-
-    private static final String COMPONENT_IS_EMPTY = "";
-
     private String fullUri;
     private String scheme;
     private String authority;
