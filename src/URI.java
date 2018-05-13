@@ -20,12 +20,14 @@ public class URI {
     private String scheme;
     private String authority;
     private String path;
+    private String query;
 
     public URI(String uri) {
         fullUri = uri;
         parseScheme();
         parseAuthority();
         parsePath();
+        query = NO_COMPONENT_FOUND;
     }
 
     public String getScheme() {
@@ -38,6 +40,10 @@ public class URI {
 
     public String getPath() {
         return path;
+    }
+
+    public String getQuery() {
+        return query;
     }
 
     private void parseScheme() {
@@ -91,5 +97,9 @@ public class URI {
 
     public boolean hasAuthority() {
         return (!authority.equals(NO_COMPONENT_FOUND));
+    }
+
+    public boolean hasQuery() {
+        return (!query.equals(NO_COMPONENT_FOUND));
     }
 }

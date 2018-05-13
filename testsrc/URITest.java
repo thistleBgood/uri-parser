@@ -106,4 +106,40 @@ public class URITest {
             assertThat(parsedPath, is(equalTo(expectedPath)));
         });
     }
+
+    @Test
+    public void uri_extracts_query() {
+        String NO_QUERY = "";
+
+        add_scenario(MAILTO, NO_QUERY);
+        add_scenario(NEWS, NO_QUERY);
+        add_scenario(TEL, NO_QUERY);
+        add_scenario(TELNET, NO_QUERY);
+        add_scenario(URN, NO_QUERY);
+
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            Object expectedQuery = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            String parsedQuery = uri.getQuery();
+            assertThat(parsedQuery, is(equalTo(expectedQuery)));
+        });
+    }
+
+    @Test
+    public void uri_checks_whether_query_exists() {
+        add_scenario(MAILTO, false);
+        add_scenario(NEWS, false);
+        add_scenario(TEL, false);
+        add_scenario(TELNET, false);
+        add_scenario(URN, false);
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            Object expectedQuery = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            boolean parsedQuery = uri.hasQuery();
+            assertThat(parsedQuery, is(equalTo(expectedQuery)));
+        });
+
+    }
 }
