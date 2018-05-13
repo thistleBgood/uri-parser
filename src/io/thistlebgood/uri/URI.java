@@ -1,6 +1,6 @@
 package io.thistlebgood.uri;
 
-import static io.thistlebgood.uri.URIConstants.*;
+import static io.thistlebgood.uri.URIConstants.COMPONENT_IS_EMPTY;
 /**
  * The URI generic syntax consists of a hierarchical sequence of five components:
  *
