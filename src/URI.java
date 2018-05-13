@@ -38,7 +38,7 @@ public class URI {
     }
 
     public boolean hasAuthority() {
-        return (!authority.equals(NO_COMPONENT_FOUND));
+        return checkOptionalComponentIsPresent(authority);
     }
 
     public String getAuthority() {
@@ -50,7 +50,7 @@ public class URI {
     }
 
     public boolean hasQuery() {
-        return (!query.equals(NO_COMPONENT_FOUND));
+        return checkOptionalComponentIsPresent(query);
     }
 
     public String getQuery() {
@@ -58,7 +58,7 @@ public class URI {
     }
 
     public boolean hasFragment() {
-        return (!fragment.equals(NO_COMPONENT_FOUND));
+        return checkOptionalComponentIsPresent(fragment);
     }
 
     public String getFragment() {
@@ -158,5 +158,9 @@ public class URI {
         } else {
             fragment = NO_COMPONENT_FOUND;
         }
+    }
+
+    private boolean checkOptionalComponentIsPresent(String component) {
+        return !component.equals(NO_COMPONENT_FOUND);
     }
 }
