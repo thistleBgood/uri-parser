@@ -13,61 +13,57 @@ import static io.thistlebgood.uri.URIUtils.optionalComponentIsPresent;
  * (brackets indicate optional components)
  */
 public class URI {
-    private String fullUri;
-    private String scheme;
-    private String authority;
-    private String path;
-    private String query;
-    private String fragment;
+    private URIData uri;
 
     public URI(String scheme, String authority, String path, String query, String fragment) {
         this(new URIBuilder(scheme, authority, path, query, fragment).toString());
     }
 
     public URI(String uri) {
-        fullUri = uri;
+        this.uri = new URIData();
+        this.uri.fullUri = uri;
         URIParser parser = new URIParser(uri);
-        scheme = parser.parseScheme();
-        authority = parser.parseAuthority();
-        path = parser.parsePath();
-        query = parser.parseQuery();
-        fragment = parser.parseFragment();
+        this.uri.scheme = parser.parseScheme();
+        this.uri.authority = parser.parseAuthority();
+        this.uri.path = parser.parsePath();
+        this.uri.query = parser.parseQuery();
+        this.uri.fragment = parser.parseFragment();
     }
 
     @Override
     public String toString() {
-        return fullUri;
+        return this.uri.fullUri;
     }
 
     public String getScheme() {
-        return scheme;
+        return this.uri.scheme;
     }
 
     public boolean hasAuthority() {
-        return optionalComponentIsPresent(authority);
+        return optionalComponentIsPresent(this.uri.authority);
     }
 
     public String getAuthority() {
-        return authority;
+        return this.uri.authority;
     }
 
     public String getPath() {
-        return path;
+        return this.uri.path;
     }
 
     public boolean hasQuery() {
-        return optionalComponentIsPresent(query);
+        return optionalComponentIsPresent(this.uri.query);
     }
 
     public String getQuery() {
-        return query;
+        return this.uri.query;
     }
 
     public boolean hasFragment() {
-        return optionalComponentIsPresent(fragment);
+        return optionalComponentIsPresent(this.uri.fragment);
     }
 
     public String getFragment() {
-        return fragment;
+        return this.uri.fragment;
     }
 }
