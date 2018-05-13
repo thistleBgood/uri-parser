@@ -65,6 +65,10 @@ public class URI {
         return fragment;
     }
 
+    private boolean checkOptionalComponentIsPresent(String component) {
+        return !component.equals(NO_COMPONENT_FOUND);
+    }
+
     private void parseScheme() {
         scheme = cropToMarker(fullUri, SCHEME_MARKER);
     }
@@ -114,6 +118,10 @@ public class URI {
         return index;
     }
 
+    private int getPathEndIndex() {
+        return getPathStartIndex() + path.length();
+    }
+
     private void parseQuery() {
         int startMarker = getPathEndIndex();
 
@@ -134,15 +142,6 @@ public class URI {
         }
     }
 
-    private int getPathEndIndex() {
-        return getPathStartIndex() + path.length();
-    }
-
-    private String cropToMarker(String uncropped, String marker) {
-        int endMarker = uncropped.indexOf(marker);
-        return uncropped.substring(0, endMarker);
-    }
-
     private int getQueryEndIndex() {
         int index = getPathEndIndex();
         if (query.length() > 0) {
@@ -160,7 +159,8 @@ public class URI {
         }
     }
 
-    private boolean checkOptionalComponentIsPresent(String component) {
-        return !component.equals(NO_COMPONENT_FOUND);
+    private String cropToMarker(String uncropped, String marker) {
+        int endMarker = uncropped.indexOf(marker);
+        return uncropped.substring(0, endMarker);
     }
 }
