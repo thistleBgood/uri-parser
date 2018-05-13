@@ -13,16 +13,15 @@ public class URIBuilder {
         this.uri.path = path;
         this.uri.query = query;
         this.uri.fragment = fragment;
-        toString();
+        this.uri.fullUri = buildFullUri();
     }
 
     @Override
     public String toString() {
-        buildFullUri();
         return this.uri.fullUri;
     }
 
-    private void buildFullUri() {
+    private String buildFullUri() {
         StringBuilder builder = new StringBuilder();
         builder.append(buildScheme());
         builder.append(buildAuthority());
@@ -30,7 +29,7 @@ public class URIBuilder {
         builder.append(buildQuery());
         builder.append(buildFragment());
 
-        this.uri.fullUri = builder.toString();
+        return builder.toString();
     }
 
     private String buildScheme() {
