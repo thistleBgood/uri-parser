@@ -22,7 +22,7 @@ public class URITest {
     private Map<String, Object> scenarios;
 
     @Before
-    public void setup_data_holder() {
+    public void initialise_scenarios_collection() {
         scenarios = new HashMap<>();
     }
 
