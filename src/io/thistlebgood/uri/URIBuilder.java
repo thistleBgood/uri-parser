@@ -37,11 +37,7 @@ public class URIBuilder {
     }
 
     private String buildAuthority() {
-        if (!authority.equals(COMPONENT_IS_EMPTY)) {
-            return AUTHORITY_MARKER + authority;
-        } else {
-            return COMPONENT_IS_EMPTY;
-        }
+        return buildOptionalComponent(AUTHORITY_MARKER, authority);
     }
 
     private String buildPath() {
@@ -49,23 +45,23 @@ public class URIBuilder {
     }
 
     private String buildQuery() {
-        if (!query.equals(COMPONENT_IS_EMPTY)) {
-            return QUERY_MARKER + query;
-        } else {
-            return COMPONENT_IS_EMPTY;
-        }
+        return buildOptionalComponent(QUERY_MARKER, query);
     }
 
     private String buildFragment() {
-        if (!fragment.equals(COMPONENT_IS_EMPTY)) {
-            return FRAGMENT_MARKER + fragment;
-        } else {
-            return COMPONENT_IS_EMPTY;
-        }
+        return buildOptionalComponent(FRAGMENT_MARKER, fragment);
     }
 
     @Override
     public String toString() {
         return fullUri;
+    }
+
+    private String buildOptionalComponent(String marker, String component) {
+        if (!component.equals(COMPONENT_IS_EMPTY)) {
+            return marker + component;
+        } else {
+            return COMPONENT_IS_EMPTY;
+        }
     }
 }
