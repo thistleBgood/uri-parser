@@ -155,4 +155,8 @@ public class URI {
             fragment = NO_COMPONENT_FOUND;
         }
     }
+
+    public boolean hasFragment() {
+        return (!fragment.equals(NO_COMPONENT_FOUND));
+    }
 }

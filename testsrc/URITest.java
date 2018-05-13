@@ -157,6 +157,27 @@ public class URITest {
     }
 
     @Test
+    public void uri_checks_whether_fragment_exists() {
+        add_scenario(SCHEME, true);
+        add_scenario(HTTPS, true);
+        add_scenario(LDAP, false);
+        add_scenario(MAILTO, false);
+        add_scenario(NEWS, false);
+        add_scenario(TEL, false);
+        add_scenario(TELNET, false);
+        add_scenario(URN, false);
+        add_scenario(WIKIPEDIA, true);
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            Object expectedQuery = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            boolean parsedQuery = uri.hasFragment();
+            assertThat(parsedQuery, is(equalTo(expectedQuery)));
+        });
+
+    }
+
+    @Test
     public void uri_extracts_fragment() {
         String NO_FRAGMENT = "";
 
