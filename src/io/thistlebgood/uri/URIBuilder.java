@@ -1,7 +1,7 @@
 package io.thistlebgood.uri;
 
 import static io.thistlebgood.uri.URIConstants.*;
-import static io.thistlebgood.uri.URIUtils.checkOptionalComponentIsPresent;
+import static io.thistlebgood.uri.URIUtils.optionalComponentIsPresent;
 
 public class URIBuilder {
     private String fullUri;
@@ -56,7 +56,7 @@ public class URIBuilder {
     }
 
     private String buildOptionalComponent(String marker, String component) {
-        if (checkOptionalComponentIsPresent(component)) {
+        if (optionalComponentIsPresent(component)) {
             return marker + component;
         } else {
             return COMPONENT_IS_EMPTY;

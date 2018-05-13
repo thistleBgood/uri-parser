@@ -1,6 +1,6 @@
 package io.thistlebgood.uri;
 
-import static io.thistlebgood.uri.URIUtils.checkOptionalComponentIsPresent;
+import static io.thistlebgood.uri.URIUtils.optionalComponentIsPresent;
 /**
  * The URI generic syntax consists of a hierarchical sequence of five components:
  *
@@ -44,7 +44,7 @@ public class URI {
     }
 
     public boolean hasAuthority() {
-        return checkOptionalComponentIsPresent(authority);
+        return optionalComponentIsPresent(authority);
     }
 
     public String getAuthority() {
@@ -56,7 +56,7 @@ public class URI {
     }
 
     public boolean hasQuery() {
-        return checkOptionalComponentIsPresent(query);
+        return optionalComponentIsPresent(query);
     }
 
     public String getQuery() {
@@ -64,7 +64,7 @@ public class URI {
     }
 
     public boolean hasFragment() {
-        return checkOptionalComponentIsPresent(fragment);
+        return optionalComponentIsPresent(fragment);
     }
 
     public String getFragment() {
