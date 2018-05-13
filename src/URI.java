@@ -106,12 +106,16 @@ public class URI {
         int startMarker = getPathEndIndex();
 
         if (startMarker < fullUri.length()) {
-            String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
-            int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-            if (endMarker == -1) {
-                query = trimmedUri;
+            if (fullUri.substring(startMarker, startMarker+1).equals(FRAGMENT_MARKER)) {
+                query = NO_COMPONENT_FOUND;
             } else {
-                query = cropToMarker(trimmedUri, FRAGMENT_MARKER);
+                String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
+                int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
+                if (endMarker == -1) {
+                    query = trimmedUri;
+                } else {
+                    query = cropToMarker(trimmedUri, FRAGMENT_MARKER);
+                }
             }
         } else {
             query = NO_COMPONENT_FOUND;

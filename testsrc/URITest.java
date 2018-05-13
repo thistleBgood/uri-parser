@@ -125,7 +125,7 @@ public class URITest {
         add_scenario(TEL, NO_QUERY);
         add_scenario(TELNET, NO_QUERY);
         add_scenario(URN, NO_QUERY);
-
+        add_scenario(WIKIPEDIA, NO_QUERY);
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object expectedQuery = scenarios.get(unprocessedUri);
@@ -145,6 +145,7 @@ public class URITest {
         add_scenario(TEL, false);
         add_scenario(TELNET, false);
         add_scenario(URN, false);
+        add_scenario(WIKIPEDIA, false);
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object expectedQuery = scenarios.get(unprocessedUri);
@@ -167,6 +168,7 @@ public class URITest {
         add_scenario(TEL, NO_FRAGMENT);
         add_scenario(TELNET, NO_FRAGMENT);
         add_scenario(URN, NO_FRAGMENT);
+        add_scenario(WIKIPEDIA, "Generic_syntax");
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object expectedFragment = scenarios.get(unprocessedUri);
