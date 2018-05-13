@@ -30,6 +30,11 @@ public class URI {
         fragment = parser.parseFragment();
     }
 
+    @Override
+    public String toString() {
+        return fullUri;
+    }
+
     public String getScheme() {
         return scheme;
     }

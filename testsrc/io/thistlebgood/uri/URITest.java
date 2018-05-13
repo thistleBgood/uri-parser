@@ -196,4 +196,24 @@ public class URITest {
             assertThat(parsedFragment, is(equalTo(expectedFragment)));
         });
     }
+
+    @Test
+    public void uri_toString_is_uri() {
+        add_scenario(SCHEME, SCHEME);
+        add_scenario(HTTPS, HTTPS);
+        add_scenario(LDAP, LDAP);
+        add_scenario(MAILTO, MAILTO);
+        add_scenario(NEWS, NEWS);
+        add_scenario(TEL, TEL);
+        add_scenario(TELNET, TELNET);
+        add_scenario(URN, URN);
+        add_scenario(WIKIPEDIA, WIKIPEDIA);
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            Object expectedURI = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            String processedURI = uri.toString();
+            assertThat(processedURI, is(equalTo(expectedURI)));
+        });
+    }
 }
