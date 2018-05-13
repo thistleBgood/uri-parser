@@ -216,4 +216,11 @@ public class URITest {
             assertThat(processedURI, is(equalTo(expectedURI)));
         });
     }
+
+    @Test
+    public void uri_builds_in_full_from_individual_components() {
+        URI uri = new URI("scheme", "authority", "path", "query", "fragment");
+
+        assertThat(uri.toString(), is(equalTo(SCHEME)));
+    }
 }

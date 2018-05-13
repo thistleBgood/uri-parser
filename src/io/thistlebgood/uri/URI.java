@@ -20,6 +20,10 @@ public class URI {
     private String query;
     private String fragment;
 
+    public URI(String scheme, String authority, String path, String query, String fragment) {
+        this(new URIBuilder(scheme, authority, path, query, fragment).toString());
+    }
+
     public URI(String uri) {
         fullUri = uri;
         URIParser parser = new URIParser(uri);
