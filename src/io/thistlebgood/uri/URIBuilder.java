@@ -18,6 +18,11 @@ public class URIBuilder {
 
     @Override
     public String toString() {
+        buildFullUri();
+        return this.uri.fullUri;
+    }
+
+    private void buildFullUri() {
         StringBuilder builder = new StringBuilder();
         builder.append(buildScheme());
         builder.append(buildAuthority());
@@ -26,11 +31,6 @@ public class URIBuilder {
         builder.append(buildFragment());
 
         this.uri.fullUri = builder.toString();
-        return this.uri.fullUri;
-    }
-
-    private void resetFullUri() {
-        this.uri.fullUri = COMPONENT_IS_EMPTY;
     }
 
     private String buildScheme() {
