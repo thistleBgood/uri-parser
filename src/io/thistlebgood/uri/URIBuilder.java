@@ -18,12 +18,14 @@ public class URIBuilder {
 
     @Override
     public String toString() {
-        resetFullUri();
-        this.uri.fullUri += buildScheme();
-        this.uri.fullUri += buildAuthority();
-        this.uri.fullUri += buildPath();
-        this.uri.fullUri += buildQuery();
-        this.uri.fullUri += buildFragment();
+        StringBuilder builder = new StringBuilder();
+        builder.append(buildScheme());
+        builder.append(buildAuthority());
+        builder.append(buildPath());
+        builder.append(buildQuery());
+        builder.append(buildFragment());
+
+        this.uri.fullUri = builder.toString();
         return this.uri.fullUri;
     }
 
