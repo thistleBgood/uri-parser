@@ -11,7 +11,7 @@ public class URIParser {
         parseAllComponents();
     }
 
-    public URIData getURIData() {
+    URIData getURIData() {
         return this.uri;
     }
 
@@ -23,16 +23,15 @@ public class URIParser {
         parseFragment();
     }
 
-    public String parseScheme() {
+    private void parseScheme() {
         this.uri.scheme = cropToMarker(this.uri.fullUri, SCHEME_MARKER);
-        return this.uri.scheme;
     }
 
     private int getSchemeEndIndex() {
         return this.uri.scheme.length() + SCHEME_MARKER.length();
     }
 
-    public String parseAuthority() {
+    private void parseAuthority() {
         String marker = AUTHORITY_MARKER;
         int startMarker = this.uri.fullUri.indexOf(marker);
 
@@ -42,10 +41,9 @@ public class URIParser {
             String trimmedUri = this.uri.fullUri.substring(startMarker + marker.length());
             this.uri.authority = cropToMarker(trimmedUri, "/");
         }
-        return this.uri.authority;
     }
 
-    public String parsePath() {
+    private void parsePath() {
         int startMarker = getPathStartIndex();
 
         String trimmedUri = this.uri.fullUri.substring(startMarker);
@@ -61,8 +59,6 @@ public class URIParser {
         } else {
             this.uri.path = cropToMarker(trimmedUri, QUERY_MARKER);
         }
-
-        return this.uri.path;
     }
 
     private int getPathStartIndex() {
@@ -79,7 +75,7 @@ public class URIParser {
         return getPathStartIndex() + this.uri.path.length();
     }
 
-    public String parseQuery() {
+    private void parseQuery() {
         int startMarker = getPathEndIndex();
 
         if (startMarker < this.uri.fullUri.length()) {
@@ -97,8 +93,6 @@ public class URIParser {
         } else {
             this.uri.query = COMPONENT_IS_EMPTY;
         }
-
-        return this.uri.query;
     }
 
     private int getQueryEndIndex() {
@@ -109,14 +103,13 @@ public class URIParser {
         return index;
     }
 
-    public String parseFragment() {
+    private void parseFragment() {
         int fragmentStartMarker = getQueryEndIndex();
         if(fragmentStartMarker < this.uri.fullUri.length()) {
             this.uri.fragment = this.uri.fullUri.substring(fragmentStartMarker + FRAGMENT_MARKER.length());
         } else {
             this.uri.fragment = COMPONENT_IS_EMPTY;
         }
-        return this.uri.fragment;
     }
 
     private String cropToMarker(String uncropped, String marker) {
