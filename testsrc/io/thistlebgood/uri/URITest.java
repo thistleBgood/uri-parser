@@ -9,6 +9,8 @@ import java.util.Map;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+import static io.thistlebgood.uri.URIConstants.COMPONENT_IS_EMPTY;
+
 public class URITest {
     private static final String SCHEME = "scheme://authority/path?query#fragment";
     private static final String HTTPS = "https://john.doe@www.example.com:123/forum/questions/?tag=networking&order=newest#top";
@@ -227,11 +229,27 @@ public class URITest {
             }
         }
 
+        String EMPTY = COMPONENT_IS_EMPTY;
+
         String[] schemeParts = {"scheme", "authority", "/path", "query", "fragment"};
         String[] httpsParts = {"https", "john.doe@www.example.com:123", "/forum/questions/", "tag=networking&order=newest", "top"};
+        String[] ldapParts = {"ldap", "[2001:db8::7]", "/c=GB", "objectClass?one", EMPTY};
+        String[] mailtoParts = {"mailto", EMPTY, "John.Doe@example.com", EMPTY, EMPTY};
+        String[] newsParts = {"news", EMPTY, "comp.infosystems.www.servers.unix", EMPTY, EMPTY};
+        String[] telParts = {"tel", EMPTY, "+1-816-555-1212", EMPTY, EMPTY};
+        String[] telnetParts = {"telnet", "192.0.2.16:80", "/", EMPTY, EMPTY};
+        String[] urnParts = {"urn", EMPTY, "oasis:names:specification:docbook:dtd:xml:4.1.2", EMPTY, EMPTY};
+        String[] wikipediaParts = {"https", "en.wikipedia.org", "/wiki/Uniform_Resource_Identifier", EMPTY, "Generic_syntax"};
 
         add_scenario(SCHEME, schemeParts);
         add_scenario(HTTPS, httpsParts);
+        add_scenario(LDAP, ldapParts);
+        add_scenario(MAILTO, mailtoParts);
+        add_scenario(NEWS, newsParts);
+        add_scenario(TEL, telParts);
+        add_scenario(TELNET, telnetParts);
+        add_scenario(URN, urnParts);
+        add_scenario(WIKIPEDIA, wikipediaParts);
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object uriComponents = scenarios.get(unprocessedUri);
