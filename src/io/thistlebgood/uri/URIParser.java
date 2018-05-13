@@ -12,6 +12,10 @@ public class URIParser {
 
     public URIParser(String uri) {
         fullUri = uri;
+        parseAllComponents();
+    }
+
+    private void parseAllComponents() {
         parseScheme();
         parseAuthority();
         parsePath();
