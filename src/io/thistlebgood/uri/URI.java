@@ -1,3 +1,5 @@
+package io.thistlebgood.uri;
+
 /**
  * The URI generic syntax consists of a hierarchical sequence of five components:
  *

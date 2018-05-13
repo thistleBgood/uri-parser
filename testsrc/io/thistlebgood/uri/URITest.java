@@ -1,3 +1,5 @@
+package io.thistlebgood.uri;
+
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Wildcard;
 import org.junit.Before;
 import org.junit.Test;
