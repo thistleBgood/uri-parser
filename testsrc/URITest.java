@@ -148,4 +148,25 @@ public class URITest {
         });
 
     }
+
+    @Test
+    public void uri_extracts_fragment() {
+        String NO_FRAGMENT = "";
+
+        add_scenario(SCHEME, "fragment");
+        add_scenario(HTTPS, "top");
+        add_scenario(LDAP, NO_FRAGMENT);
+        add_scenario(MAILTO, NO_FRAGMENT);
+        add_scenario(NEWS, NO_FRAGMENT);
+        add_scenario(TEL, NO_FRAGMENT);
+        add_scenario(TELNET, NO_FRAGMENT);
+        add_scenario(URN, NO_FRAGMENT);
+
+        scenarios.keySet().forEach(unprocessedUri -> {
+            Object expectedFragment = scenarios.get(unprocessedUri);
+            URI uri = new URI(unprocessedUri);
+            String parsedFragment = uri.getFragment();
+            assertThat(parsedFragment, is(equalTo(expectedFragment)));
+        });
+    }
 }

@@ -22,6 +22,7 @@ public class URI {
     private String authority;
     private String path;
     private String query;
+    private String fragment;
 
     public URI(String uri) {
         fullUri = uri;
@@ -29,6 +30,7 @@ public class URI {
         parseAuthority();
         parsePath();
         parseQuery();
+        parseFragment();
     }
 
     public String getScheme() {
@@ -45,6 +47,10 @@ public class URI {
 
     public String getQuery() {
         return query;
+    }
+
+    public String getFragment() {
+        return fragment;
     }
 
     private void parseScheme() {
@@ -122,5 +128,22 @@ public class URI {
 
     public boolean hasQuery() {
         return (!query.equals(NO_COMPONENT_FOUND));
+    }
+
+    private int getQueryEndIndex() {
+        int index = getPathEndIndex();
+        if (query.length() > 0) {
+            index += QUERY_MARKER.length() + query.length();
+        }
+        return index;
+    }
+
+    private void parseFragment() {
+        int fragmentStartMarker = getQueryEndIndex();
+        if(fragmentStartMarker < fullUri.length()) {
+            fragment = fullUri.substring(fragmentStartMarker + FRAGMENT_MARKER.length());
+        } else {
+            fragment = NO_COMPONENT_FOUND;
+        }
     }
 }
