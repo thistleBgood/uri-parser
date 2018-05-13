@@ -68,7 +68,6 @@ public class URITest {
             boolean parsedAuthority = uri.hasAuthority();
             assertThat(parsedAuthority, is(equalTo(expectedAuthority)));
         });
-
     }
 
     @Test
@@ -131,7 +130,6 @@ public class URITest {
             boolean parsedQuery = uri.hasQuery();
             assertThat(parsedQuery, is(equalTo(expectedQuery)));
         });
-
     }
 
     @Test
@@ -174,7 +172,6 @@ public class URITest {
             boolean parsedQuery = uri.hasFragment();
             assertThat(parsedQuery, is(equalTo(expectedQuery)));
         });
-
     }
 
     @Test
