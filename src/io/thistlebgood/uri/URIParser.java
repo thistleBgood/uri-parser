@@ -7,7 +7,9 @@ public class URIParser {
 
     public URIParser(String uri) {
         this.uri = new URIData();
+
         this.uri.fullUri = uri;
+
         parseAllComponents();
     }
 

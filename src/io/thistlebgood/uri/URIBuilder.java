@@ -8,11 +8,13 @@ public class URIBuilder {
 
     public URIBuilder(String scheme, String authority, String path, String query, String fragment) {
         this.uri = new URIData();
+
         this.uri.scheme = scheme;
         this.uri.authority = authority;
         this.uri.path = path;
         this.uri.query = query;
         this.uri.fragment = fragment;
+
         this.uri.fullUri = buildFullUri();
     }
 
