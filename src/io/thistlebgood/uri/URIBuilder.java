@@ -16,16 +16,18 @@ public class URIBuilder {
         this.path = path;
         this.query = query;
         this.fragment = fragment;
-        buildUri();
+        toString();
     }
 
-    private void buildUri() {
+    @Override
+    public String toString() {
         resetUri();
         fullUri += buildScheme();
         fullUri += buildAuthority();
         fullUri += buildPath();
         fullUri += buildQuery();
         fullUri += buildFragment();
+        return fullUri;
     }
 
     private void resetUri() {
@@ -50,11 +52,6 @@ public class URIBuilder {
 
     private String buildFragment() {
         return buildOptionalComponent(FRAGMENT_MARKER, fragment);
-    }
-
-    @Override
-    public String toString() {
-        return fullUri;
     }
 
     private String buildOptionalComponent(String marker, String component) {
