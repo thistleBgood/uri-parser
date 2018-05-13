@@ -15,7 +15,7 @@ public class URI {
     private static final String QUERY_MARKER = "?";
     private static final String FRAGMENT_MARKER = "#";
 
-    private static final String NO_COMPONENT_FOUND = "";
+    private static final String COMPONENT_IS_EMPTY = "";
 
     private String fullUri;
     private String scheme;
@@ -66,7 +66,7 @@ public class URI {
     }
 
     private boolean checkOptionalComponentIsPresent(String component) {
-        return !component.equals(NO_COMPONENT_FOUND);
+        return !component.equals(COMPONENT_IS_EMPTY);
     }
 
     private void parseScheme() {
@@ -82,7 +82,7 @@ public class URI {
         int startMarker = fullUri.indexOf(marker);
 
         if (startMarker == -1) {
-            authority = NO_COMPONENT_FOUND;
+            authority = COMPONENT_IS_EMPTY;
         } else {
             String trimmedUri = fullUri.substring(startMarker + marker.length());
             authority = cropToMarker(trimmedUri, "/");
@@ -127,7 +127,7 @@ public class URI {
 
         if (startMarker < fullUri.length()) {
             if (fullUri.substring(startMarker, startMarker+1).equals(FRAGMENT_MARKER)) {
-                query = NO_COMPONENT_FOUND;
+                query = COMPONENT_IS_EMPTY;
             } else {
                 String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
                 int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
@@ -138,7 +138,7 @@ public class URI {
                 }
             }
         } else {
-            query = NO_COMPONENT_FOUND;
+            query = COMPONENT_IS_EMPTY;
         }
     }
 
@@ -155,7 +155,7 @@ public class URI {
         if(fragmentStartMarker < fullUri.length()) {
             fragment = fullUri.substring(fragmentStartMarker + FRAGMENT_MARKER.length());
         } else {
-            fragment = NO_COMPONENT_FOUND;
+            fragment = COMPONENT_IS_EMPTY;
         }
     }
 
