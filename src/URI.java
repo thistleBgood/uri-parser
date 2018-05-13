@@ -13,6 +13,7 @@ public class URI {
     private static final String SCHEME_MARKER = ":";
     private static final String AUTHORITY_MARKER = "//";
     private static final String QUERY_MARKER = "?";
+    private static final String FRAGMENT_MARKER = "#";
 
     private static final String NO_COMPONENT_FOUND = "";
 
@@ -27,7 +28,7 @@ public class URI {
         parseScheme();
         parseAuthority();
         parsePath();
-        query = NO_COMPONENT_FOUND;
+        parseQuery();
     }
 
     public String getScheme() {
@@ -88,6 +89,26 @@ public class URI {
         }
 
         return index;
+    }
+
+    private void parseQuery() {
+        int startMarker = getPathEndIndex();
+
+        if (startMarker < fullUri.length()) {
+            String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
+            int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
+            if (endMarker == -1) {
+                query = trimmedUri;
+            } else {
+                query = cropToMarker(trimmedUri, FRAGMENT_MARKER);
+            }
+        } else {
+            query = NO_COMPONENT_FOUND;
+        }
+    }
+
+    private int getPathEndIndex() {
+        return getPathStartIndex() + path.length();
     }
 
     private String cropToMarker(String uncropped, String marker) {

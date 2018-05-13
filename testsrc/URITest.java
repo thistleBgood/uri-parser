@@ -111,6 +111,9 @@ public class URITest {
     public void uri_extracts_query() {
         String NO_QUERY = "";
 
+        add_scenario(SCHEME, "query");
+        add_scenario(HTTPS, "tag=networking&order=newest");
+        add_scenario(LDAP, "objectClass?one");
         add_scenario(MAILTO, NO_QUERY);
         add_scenario(NEWS, NO_QUERY);
         add_scenario(TEL, NO_QUERY);
@@ -128,6 +131,9 @@ public class URITest {
 
     @Test
     public void uri_checks_whether_query_exists() {
+        add_scenario(SCHEME, true);
+        add_scenario(HTTPS, true);
+        add_scenario(LDAP, true);
         add_scenario(MAILTO, false);
         add_scenario(NEWS, false);
         add_scenario(TEL, false);
