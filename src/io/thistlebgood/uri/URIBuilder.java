@@ -18,7 +18,7 @@ public class URIBuilder {
 
     @Override
     public String toString() {
-        resetUri();
+        resetFullUri();
         this.uri.fullUri += buildScheme();
         this.uri.fullUri += buildAuthority();
         this.uri.fullUri += buildPath();
@@ -27,7 +27,7 @@ public class URIBuilder {
         return this.uri.fullUri;
     }
 
-    private void resetUri() {
+    private void resetFullUri() {
         this.uri.fullUri = COMPONENT_IS_EMPTY;
     }
 
