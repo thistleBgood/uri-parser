@@ -37,6 +37,10 @@ public class URI {
         return scheme;
     }
 
+    public boolean hasAuthority() {
+        return (!authority.equals(NO_COMPONENT_FOUND));
+    }
+
     public String getAuthority() {
         return authority;
     }
@@ -45,8 +49,16 @@ public class URI {
         return path;
     }
 
+    public boolean hasQuery() {
+        return (!query.equals(NO_COMPONENT_FOUND));
+    }
+
     public String getQuery() {
         return query;
+    }
+
+    public boolean hasFragment() {
+        return (!fragment.equals(NO_COMPONENT_FOUND));
     }
 
     public String getFragment() {
@@ -131,14 +143,6 @@ public class URI {
         return uncropped.substring(0, endMarker);
     }
 
-    public boolean hasAuthority() {
-        return (!authority.equals(NO_COMPONENT_FOUND));
-    }
-
-    public boolean hasQuery() {
-        return (!query.equals(NO_COMPONENT_FOUND));
-    }
-
     private int getQueryEndIndex() {
         int index = getPathEndIndex();
         if (query.length() > 0) {
@@ -154,9 +158,5 @@ public class URI {
         } else {
             fragment = NO_COMPONENT_FOUND;
         }
-    }
-
-    public boolean hasFragment() {
-        return (!fragment.equals(NO_COMPONENT_FOUND));
     }
 }
