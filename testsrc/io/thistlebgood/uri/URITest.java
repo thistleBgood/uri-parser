@@ -227,8 +227,10 @@ public class URITest {
             }
         }
 
-        String[] schemeParts = {"scheme", "authority", "path", "query", "fragment"};
+        String[] schemeParts = {"scheme", "authority", "/path", "query", "fragment"};
         add_scenario(SCHEME, schemeParts);
+        String[] httpsParts = {"https", "john.doe@www.example.com:123", "/forum/questions/", "tag=networking&order=newest", "top"};
+        add_scenario(HTTPS, httpsParts);
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object uriComponents = scenarios.get(unprocessedUri);
