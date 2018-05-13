@@ -20,14 +20,8 @@ public class URI {
     }
 
     public URI(String uri) {
-        this.uri = new URIData();
-        this.uri.fullUri = uri;
         URIParser parser = new URIParser(uri);
-        this.uri.scheme = parser.parseScheme();
-        this.uri.authority = parser.parseAuthority();
-        this.uri.path = parser.parsePath();
-        this.uri.query = parser.parseQuery();
-        this.uri.fragment = parser.parseFragment();
+        this.uri = parser.getURIData();
     }
 
     @Override

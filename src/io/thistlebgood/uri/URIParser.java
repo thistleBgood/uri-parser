@@ -11,6 +11,10 @@ public class URIParser {
         parseAllComponents();
     }
 
+    public URIData getURIData() {
+        return this.uri;
+    }
+
     private void parseAllComponents() {
         parseScheme();
         parseAuthority();
