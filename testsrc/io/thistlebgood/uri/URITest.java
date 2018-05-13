@@ -219,8 +219,20 @@ public class URITest {
 
     @Test
     public void uri_builds_in_full_from_individual_components() {
-        URI uri = new URI("scheme", "authority", "path", "query", "fragment");
+        String[] schemeParts = {"scheme", "authority", "path", "query", "fragment"};
+        add_scenario(SCHEME, schemeParts);
 
-        assertThat(uri.toString(), is(equalTo(SCHEME)));
+        scenarios.keySet().forEach(unprocessedUri -> {
+            Object uriComponents = scenarios.get(unprocessedUri);
+            URI uri = new TestURI((String[])uriComponents);
+            String processedURI = uri.toString();
+            assertThat(processedURI, is(equalTo(unprocessedUri)));
+        });
+    }
+
+    private class TestURI extends URI {
+        TestURI(String[] parts) {
+            super(parts[0], parts[1], parts[2], parts[3], parts[4]);
+        }
     }
 }
