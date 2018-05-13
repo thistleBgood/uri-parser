@@ -1,3 +1,4 @@
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Wildcard;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +17,7 @@ public class URITest {
     private static final String TEL = "tel:+1-816-555-1212";
     private static final String TELNET = "telnet://192.0.2.16:80/";
     private static final String URN = "urn:oasis:names:specification:docbook:dtd:xml:4.1.2";
+    private static final String WIKIPEDIA = "https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Generic_syntax";
 
     private Map<String, Object> scenarios;
 
@@ -38,6 +40,7 @@ public class URITest {
         add_scenario(TEL, "tel");
         add_scenario(TELNET, "telnet");
         add_scenario(URN, "urn");
+        add_scenario(WIKIPEDIA, "https");
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object expectedScheme = scenarios.get(unprocessedUri);
@@ -57,6 +60,7 @@ public class URITest {
         add_scenario(TEL, false);
         add_scenario(TELNET, true);
         add_scenario(URN, false);
+        add_scenario(WIKIPEDIA, true);
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object expectedAuthority = scenarios.get(unprocessedUri);
@@ -79,6 +83,7 @@ public class URITest {
         add_scenario(TEL, NO_AUTHORITY);
         add_scenario(TELNET, "192.0.2.16:80");
         add_scenario(URN, NO_AUTHORITY);
+        add_scenario(WIKIPEDIA, "en.wikipedia.org");
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object expectedAuthority = scenarios.get(unprocessedUri);
@@ -98,6 +103,7 @@ public class URITest {
         add_scenario(TEL, "+1-816-555-1212");
         add_scenario(TELNET, "/");
         add_scenario(URN, "oasis:names:specification:docbook:dtd:xml:4.1.2");
+        add_scenario(WIKIPEDIA, "/wiki/Uniform_Resource_Identifier");
 
         scenarios.keySet().forEach(unprocessedUri -> {
             Object expectedPath = scenarios.get(unprocessedUri);

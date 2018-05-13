@@ -77,10 +77,15 @@ public class URI {
         int startMarker = getPathStartIndex();
 
         String trimmedUri = fullUri.substring(startMarker);
-        int endMarker = trimmedUri.indexOf(QUERY_MARKER);
+        int queryMarker = trimmedUri.indexOf(QUERY_MARKER);
 
-        if (endMarker == -1) {
-            path = trimmedUri;
+        if (queryMarker == -1) {
+            int fragmentMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
+            if (fragmentMarker == -1) {
+                path = trimmedUri;
+            } else {
+                path = cropToMarker(trimmedUri, FRAGMENT_MARKER);
+            }
         } else {
             path = cropToMarker(trimmedUri, QUERY_MARKER);
         }
