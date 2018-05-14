@@ -45,15 +45,15 @@ public class URIParser {
         String trimmedUri = this.uri.fullUri.substring(startMarker);
         int queryMarker = trimmedUri.indexOf(QUERY_MARKER);
 
-        if (queryMarker == -1) {
+        if (!(queryMarker == -1)) {
+            this.uri.path = cropToMarker(trimmedUri, QUERY_MARKER);
+        } else {
             int fragmentMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
             if (indexFound(fragmentMarker)) {
                 this.uri.path = cropToMarker(trimmedUri, FRAGMENT_MARKER);
             } else {
                 this.uri.path = trimmedUri;
             }
-        } else {
-            this.uri.path = cropToMarker(trimmedUri, QUERY_MARKER);
         }
     }
 
