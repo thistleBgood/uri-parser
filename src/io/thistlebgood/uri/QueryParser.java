@@ -5,7 +5,7 @@ import static io.thistlebgood.uri.URIConstants.FRAGMENT_MARKER;
 import static io.thistlebgood.uri.URIConstants.QUERY_MARKER;
 import static io.thistlebgood.uri.URIIndexer.getPathEndIndex;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
-import static io.thistlebgood.uri.URIUtils.indexFound;
+import static io.thistlebgood.uri.URIUtils.hasOptionalComponent;
 
 class QueryParser {
 
@@ -14,28 +14,34 @@ class QueryParser {
     }
 
     static String parse(String fullUri, int startMarker) {
-        if (queryComponentIsPresent(fullUri, startMarker)) {
-            String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
-            int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-            if (indexFound(endMarker)) {
-                return cropToMarker(trimmedUri, FRAGMENT_MARKER);
-            } else {
-                return trimmedUri;
+        return cropAfterQuery(cropBeforeQuery(fullUri, startMarker));
+    }
+
+    private static String cropAfterQuery(String trimmedUri1) {
+        if (hasQuery(trimmedUri1)) {
+
+            String trimmedUri2 = trimmedUri1.substring(QUERY_MARKER.length());
+
+            if (hasFragment(trimmedUri1)) {
+                trimmedUri2 = cropToMarker(trimmedUri2, FRAGMENT_MARKER);
             }
+
+            return trimmedUri2;
+
         } else {
             return COMPONENT_IS_EMPTY;
         }
     }
 
-    private static boolean queryComponentIsPresent(String fullUri, int startMarker) {
-        return optionalComponentsArePresent(fullUri, startMarker) && queryMarkerIsPresent(fullUri, startMarker);
+    private static String cropBeforeQuery (String fullUri, int startMarker) {
+        return fullUri.substring(startMarker);
     }
 
-    private static boolean optionalComponentsArePresent(String fullUri, int startMarker) {
-        return startMarker < fullUri.length();
+    private static boolean hasQuery(String trimmedUri) {
+        return hasOptionalComponent(trimmedUri, QUERY_MARKER);
     }
 
-    private static boolean queryMarkerIsPresent(String fullUri, int startMarker) {
-        return fullUri.substring(startMarker, startMarker+1).equals(QUERY_MARKER);
+    private static boolean hasFragment(String trimmedUri) {
+        return hasOptionalComponent(trimmedUri, FRAGMENT_MARKER);
     }
 }
