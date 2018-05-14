@@ -2,6 +2,7 @@ package io.thistlebgood.uri;
 
 import static io.thistlebgood.uri.URIConstants.*;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
+import static io.thistlebgood.uri.URIUtils.indexFound;
 
 public class URIParser {
     private URIData uri;
@@ -46,7 +47,7 @@ public class URIParser {
 
         if (queryMarker == -1) {
             int fragmentMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-            if (!(fragmentMarker == -1)) {
+            if (indexFound(fragmentMarker)) {
                 this.uri.path = cropToMarker(trimmedUri, FRAGMENT_MARKER);
             } else {
                 this.uri.path = trimmedUri;
