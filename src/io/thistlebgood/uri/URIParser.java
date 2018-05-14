@@ -86,11 +86,6 @@ public class URIParser {
     }
 
     private void parseFragment() {
-        int fragmentStartMarker = getQueryEndIndex();
-        if(fragmentStartMarker < this.uri.fullUri.length()) {
-            this.uri.fragment = this.uri.fullUri.substring(fragmentStartMarker + FRAGMENT_MARKER.length());
-        } else {
-            this.uri.fragment = COMPONENT_IS_EMPTY;
-        }
+        this.uri.fragment = FragmentParser.parse(this.uri.fullUri, getQueryEndIndex());
     }
 }
