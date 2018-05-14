@@ -23,10 +23,10 @@ class QueryParser {
             trimmedUri = trimmedUri.substring(QUERY_MARKER.length());
 
             if (hasFragment(trimmedUri)) {
-                trimmedUri = cropToMarker(trimmedUri, FRAGMENT_MARKER);
+                return cropToMarker(trimmedUri, FRAGMENT_MARKER);
+            } else {
+                return trimmedUri;
             }
-
-            return trimmedUri;
 
         } else {
             return COMPONENT_IS_EMPTY;
