@@ -3,6 +3,7 @@ package io.thistlebgood.uri;
 import static io.thistlebgood.uri.URIConstants.AUTHORITY_MARKER;
 import static io.thistlebgood.uri.URIConstants.COMPONENT_IS_EMPTY;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
+import static io.thistlebgood.uri.URIUtils.indexFound;
 
 class AuthorityParser {
 
@@ -11,7 +12,7 @@ class AuthorityParser {
 
         int startMarker = fullUri.indexOf(AUTHORITY_MARKER);
 
-        if (!(startMarker == -1)) {
+        if (indexFound(startMarker)) {
             String trimmedUri = fullUri.substring(startMarker + AUTHORITY_MARKER.length());
             authority = cropToMarker(trimmedUri, "/");
         }

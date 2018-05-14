@@ -11,4 +11,8 @@ class URIUtils {
         int endMarker = uncropped.indexOf(marker);
         return uncropped.substring(0, endMarker);
     }
+
+    static boolean indexFound(int markerIndex) {
+        return !(markerIndex == -1);
+    }
 }
