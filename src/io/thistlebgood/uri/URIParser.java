@@ -3,6 +3,7 @@ package io.thistlebgood.uri;
 import static io.thistlebgood.uri.URIConstants.*;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
 import static io.thistlebgood.uri.URIUtils.indexFound;
+import static io.thistlebgood.uri.URIUtils.optionalComponentIsPresent;
 
 public class URIParser {
     private URIData uri;
@@ -42,7 +43,7 @@ public class URIParser {
     private int getPathStartIndex() {
         int index = getSchemeEndIndex();
 
-        if (this.uri.authority.length() > 0) {
+        if (optionalComponentIsPresent(this.uri.authority)) {
             index += AUTHORITY_MARKER.length() + this.uri.authority.length();
         }
 
@@ -91,7 +92,7 @@ public class URIParser {
 
     private int getQueryEndIndex() {
         int index = getPathEndIndex();
-        if (this.uri.query.length() > 0) {
+        if (optionalComponentIsPresent(this.uri.query)) {
             index += QUERY_MARKER.length() + this.uri.query.length();
         }
         return index;
