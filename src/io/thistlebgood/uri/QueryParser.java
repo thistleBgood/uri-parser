@@ -20,7 +20,7 @@ class QueryParser {
     private static String cropAfterQuery(String trimmedUri) {
         if (hasQuery(trimmedUri)) {
 
-            trimmedUri = trimmedUri.substring(QUERY_MARKER.length());
+            trimmedUri = cropQueryMarker(trimmedUri);
 
             if (hasFragment(trimmedUri)) {
                 return cropToMarker(trimmedUri, FRAGMENT_MARKER);
@@ -31,6 +31,10 @@ class QueryParser {
         } else {
             return COMPONENT_IS_EMPTY;
         }
+    }
+
+    private static String cropQueryMarker(String trimmedUri) {
+        return trimmedUri.substring(QUERY_MARKER.length());
     }
 
     private static String cropBeforeQuery (String fullUri, int startMarker) {
