@@ -4,6 +4,7 @@ import static io.thistlebgood.uri.URIConstants.*;
 import static io.thistlebgood.uri.URIUtils.optionalComponentIsPresent;
 
 public class URIBuilder {
+    private StringBuilder builder;
     private URIData uri;
 
     public URIBuilder(String scheme, String authority, String path, String query, String fragment) {
@@ -15,11 +16,11 @@ public class URIBuilder {
         this.uri.query = query;
         this.uri.fragment = fragment;
 
-        this.uri.fullUri = buildFullUri();
+        this.uri.fullUri = buildFullUriFromComponents();
     }
 
     URIData getURIData() {
-        return uri;
+        return this.uri;
     }
 
     @Override
@@ -27,35 +28,35 @@ public class URIBuilder {
         return this.uri.fullUri;
     }
 
-    private String buildFullUri() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(buildScheme());
-        builder.append(buildAuthority());
-        builder.append(buildPath());
-        builder.append(buildQuery());
-        builder.append(buildFragment());
+    private String buildFullUriFromComponents() {
+        resetBuilder();
+        buildScheme();
+        buildAuthority();
+        buildPath();
+        buildQuery();
+        buildFragment();
 
-        return builder.toString();
+        return buildFullUri();
     }
 
-    private String buildScheme() {
-        return this.uri.scheme + SCHEME_MARKER;
+    private void buildScheme() {
+        append(this.uri.scheme + SCHEME_MARKER);
     }
 
-    private String buildAuthority() {
-        return buildOptionalComponent(AUTHORITY_MARKER, this.uri.authority);
+    private void buildAuthority() {
+        append(buildOptionalComponent(AUTHORITY_MARKER, this.uri.authority));
     }
 
-    private String buildPath() {
-        return this.uri.path;
+    private void buildPath() {
+        append(this.uri.path);
     }
 
-    private String buildQuery() {
-        return buildOptionalComponent(QUERY_MARKER, this.uri.query);
+    private void buildQuery() {
+        append(buildOptionalComponent(QUERY_MARKER, this.uri.query));
     }
 
-    private String buildFragment() {
-        return buildOptionalComponent(FRAGMENT_MARKER, this.uri.fragment);
+    private void buildFragment() {
+        append(buildOptionalComponent(FRAGMENT_MARKER, this.uri.fragment));
     }
 
     private String buildOptionalComponent(String marker, String component) {
@@ -64,5 +65,17 @@ public class URIBuilder {
         } else {
             return COMPONENT_IS_EMPTY;
         }
+    }
+
+    private void resetBuilder() {
+        builder = new StringBuilder();
+    }
+
+    private void append(String component) {
+        builder.append(component);
+    }
+
+    private String buildFullUri() {
+        return builder.toString();
     }
 }
