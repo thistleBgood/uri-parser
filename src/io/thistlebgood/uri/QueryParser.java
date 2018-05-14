@@ -5,6 +5,7 @@ import static io.thistlebgood.uri.URIConstants.FRAGMENT_MARKER;
 import static io.thistlebgood.uri.URIConstants.QUERY_MARKER;
 import static io.thistlebgood.uri.URIIndexer.getPathEndIndex;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
+import static io.thistlebgood.uri.URIUtils.indexFound;
 
 class QueryParser {
 
@@ -16,10 +17,10 @@ class QueryParser {
         if (queryComponentIsPresent(fullUri, startMarker)) {
             String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
             int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-            if (endMarker == -1) {
-                return trimmedUri;
-            } else {
+            if (indexFound(endMarker)) {
                 return cropToMarker(trimmedUri, FRAGMENT_MARKER);
+            } else {
+                return trimmedUri;
             }
         } else {
             return COMPONENT_IS_EMPTY;
