@@ -46,10 +46,10 @@ public class URIParser {
 
         if (queryMarker == -1) {
             int fragmentMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-            if (fragmentMarker == -1) {
-                this.uri.path = trimmedUri;
-            } else {
+            if (!(fragmentMarker == -1)) {
                 this.uri.path = cropToMarker(trimmedUri, FRAGMENT_MARKER);
+            } else {
+                this.uri.path = trimmedUri;
             }
         } else {
             this.uri.path = cropToMarker(trimmedUri, QUERY_MARKER);
