@@ -40,10 +40,7 @@ public class URIParser {
     }
 
     private void parseFragment() {
-        this.uri.fragment = FragmentParser.parse(this.uri.fullUri, getQueryEndIndex());
+        FragmentParser.parse(this.uri);
     }
 
-    private int getQueryEndIndex() {
-        return URIIndexer.getQueryEndIndex(this.uri);
-    }
 }

@@ -5,6 +5,10 @@ import static io.thistlebgood.uri.URIConstants.FRAGMENT_MARKER;
 
 class FragmentParser {
 
+    static void parse (URIData uri) {
+        uri.fragment = parse(uri.fullUri, URIIndexer.getQueryEndIndex(uri));
+    }
+
     static String parse(String fullUri, int startMarker) {
         if(startMarker < fullUri.length()) {
             return fullUri.substring(startMarker + FRAGMENT_MARKER.length());
