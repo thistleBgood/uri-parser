@@ -7,6 +7,11 @@ class URIUtils {
         return !component.equals(COMPONENT_IS_EMPTY);
     }
 
+    static boolean hasOptionalComponent(String trimmedUri, String marker) {
+        int queryMarker = trimmedUri.indexOf(marker);
+        return indexFound(queryMarker);
+    }
+
     static String cropToMarker(String uncropped, String marker) {
         int endMarker = uncropped.indexOf(marker);
         return uncropped.substring(0, endMarker);

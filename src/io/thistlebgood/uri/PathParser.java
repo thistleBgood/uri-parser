@@ -3,7 +3,7 @@ package io.thistlebgood.uri;
 import static io.thistlebgood.uri.URIConstants.FRAGMENT_MARKER;
 import static io.thistlebgood.uri.URIConstants.QUERY_MARKER;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
-import static io.thistlebgood.uri.URIUtils.indexFound;
+import static io.thistlebgood.uri.URIUtils.hasOptionalComponent;
 
 class PathParser {
 
@@ -31,10 +31,6 @@ class PathParser {
 
     private static boolean hasFragment (String trimmedUri){
         return hasOptionalComponent(trimmedUri, FRAGMENT_MARKER);
-    }
-    private static boolean hasOptionalComponent(String trimmedUri, String marker) {
-        int queryMarker = trimmedUri.indexOf(marker);
-        return indexFound(queryMarker);
     }
 
     private static String cropToQuery(String trimmedUri) {
