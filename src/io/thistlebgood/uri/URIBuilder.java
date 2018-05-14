@@ -16,7 +16,7 @@ public class URIBuilder {
         this.uri.query = query;
         this.uri.fragment = fragment;
 
-        this.uri.fullUri = buildFullUriFromComponents();
+        buildAllComponents();
     }
 
     URIData getURIData() {
@@ -28,15 +28,14 @@ public class URIBuilder {
         return this.uri.fullUri;
     }
 
-    private String buildFullUriFromComponents() {
+    private void buildAllComponents() {
         resetBuilder();
         buildScheme();
         buildAuthority();
         buildPath();
         buildQuery();
         buildFragment();
-
-        return buildFullUri();
+        buildFullUri();
     }
 
     private void buildScheme() {
@@ -75,7 +74,7 @@ public class URIBuilder {
         builder.append(component);
     }
 
-    private String buildFullUri() {
-        return builder.toString();
+    private void buildFullUri() {
+        this.uri.fullUri = builder.toString();
     }
 }
