@@ -8,6 +8,10 @@ import static io.thistlebgood.uri.URIUtils.hasOptionalComponent;
 
 class AuthorityParser {
 
+    static void parse(URIData uri) {
+        uri.authority = parse(uri.fullUri);
+    }
+
     static String parse(String fullUri) {
         if (hasAuthority(fullUri)) {
             //This is in two stages as path marker is substring of authority marker.

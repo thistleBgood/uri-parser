@@ -28,7 +28,7 @@ public class URIParser {
     }
 
     private void parseAuthority() {
-        this.uri.authority = AuthorityParser.parse(this.uri.fullUri);
+        AuthorityParser.parse(this.uri);
     }
 
     private void parsePath() {
