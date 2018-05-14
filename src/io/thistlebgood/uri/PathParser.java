@@ -2,13 +2,14 @@ package io.thistlebgood.uri;
 
 import static io.thistlebgood.uri.URIConstants.FRAGMENT_MARKER;
 import static io.thistlebgood.uri.URIConstants.QUERY_MARKER;
+import static io.thistlebgood.uri.URIIndexer.getPathStartIndex;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
 import static io.thistlebgood.uri.URIUtils.hasOptionalComponent;
 
 class PathParser {
 
     static void parse(URIData uri) {
-        uri.path = parse(uri.fullUri, URIIndexer.getPathStartIndex(uri));
+        uri.path = parse(uri.fullUri, getPathStartIndex(uri));
     }
 
     static String parse(String fullUri, int startMarker) {

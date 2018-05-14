@@ -3,12 +3,13 @@ package io.thistlebgood.uri;
 import static io.thistlebgood.uri.URIConstants.COMPONENT_IS_EMPTY;
 import static io.thistlebgood.uri.URIConstants.FRAGMENT_MARKER;
 import static io.thistlebgood.uri.URIConstants.QUERY_MARKER;
+import static io.thistlebgood.uri.URIIndexer.getPathEndIndex;
 import static io.thistlebgood.uri.URIUtils.cropToMarker;
 
 class QueryParser {
 
     static void parse(URIData uri) {
-        uri.query = parse(uri.fullUri, URIIndexer.getPathEndIndex(uri));
+        uri.query = parse(uri.fullUri, getPathEndIndex(uri));
     }
 
     static String parse(String fullUri, int startMarker) {
