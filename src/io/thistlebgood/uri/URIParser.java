@@ -51,19 +51,7 @@ public class URIParser {
     }
 
     private void parsePath() {
-        int startMarker = getPathStartIndex();
-
-        String trimmedUri = this.uri.fullUri.substring(startMarker);
-        int queryMarker = trimmedUri.indexOf(QUERY_MARKER);
-        int fragmentMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-
-        if (indexFound(queryMarker)) {
-            this.uri.path = cropToMarker(trimmedUri, QUERY_MARKER);
-        } else if (indexFound(fragmentMarker)) {
-            this.uri.path = cropToMarker(trimmedUri, FRAGMENT_MARKER);
-        } else {
-            this.uri.path = trimmedUri;
-        }
+        this.uri.path = PathParser.parse(this.uri.fullUri, getPathStartIndex());
     }
 
     private int getPathEndIndex() {
