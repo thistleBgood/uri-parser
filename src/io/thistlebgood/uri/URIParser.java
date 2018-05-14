@@ -47,29 +47,15 @@ public class URIParser {
         this.uri.fragment = FragmentParser.parse(this.uri.fullUri, getQueryEndIndex());
     }
 
-    private int getSchemeEndIndex() {
-        return this.uri.scheme.length() + SCHEME_MARKER.length();
-    }
-
     private int getPathStartIndex() {
-        int index = getSchemeEndIndex();
-
-        if (optionalComponentIsPresent(this.uri.authority)) {
-            index += AUTHORITY_MARKER.length() + this.uri.authority.length();
-        }
-
-        return index;
+        return URIIndexer.getPathStartIndex(this.uri);
     }
 
     private int getPathEndIndex() {
-        return getPathStartIndex() + this.uri.path.length();
+        return URIIndexer.getPathEndIndex(this.uri);
     }
 
     private int getQueryEndIndex() {
-        int index = getPathEndIndex();
-        if (optionalComponentIsPresent(this.uri.query)) {
-            index += QUERY_MARKER.length() + this.uri.query.length();
-        }
-        return index;
+        return URIIndexer.getQueryEndIndex(this.uri);
     }
 }
