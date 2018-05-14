@@ -7,6 +7,10 @@ import static io.thistlebgood.uri.URIUtils.cropToMarker;
 
 class QueryParser {
 
+    static void parse(URIData uri) {
+        uri.query = parse(uri.fullUri, URIIndexer.getPathEndIndex(uri));
+    }
+
     static String parse(String fullUri, int startMarker) {
         if (startMarker < fullUri.length()) {
             if (fullUri.substring(startMarker, startMarker+1).equals(FRAGMENT_MARKER)) {

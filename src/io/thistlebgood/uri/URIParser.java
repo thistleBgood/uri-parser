@@ -36,15 +36,11 @@ public class URIParser {
     }
 
     private void parseQuery() {
-        this.uri.query = QueryParser.parse(this.uri.fullUri, getPathEndIndex());
+        QueryParser.parse(this.uri);
     }
 
     private void parseFragment() {
         this.uri.fragment = FragmentParser.parse(this.uri.fullUri, getQueryEndIndex());
-    }
-
-    private int getPathEndIndex() {
-        return URIIndexer.getPathEndIndex(this.uri);
     }
 
     private int getQueryEndIndex() {
