@@ -18,6 +18,10 @@ public class URIBuilder {
         this.uri.fullUri = buildFullUri();
     }
 
+    URIData getURIData() {
+        return uri;
+    }
+
     @Override
     public String toString() {
         return this.uri.fullUri;

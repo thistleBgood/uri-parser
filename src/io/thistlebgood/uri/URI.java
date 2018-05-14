@@ -16,7 +16,7 @@ public class URI {
     private URIData uri;
 
     public URI(String scheme, String authority, String path, String query, String fragment) {
-        this(new URIBuilder(scheme, authority, path, query, fragment).toString());
+        this.uri = new URIBuilder(scheme, authority, path, query, fragment).getURIData();
     }
 
     public URI(String uri) {
