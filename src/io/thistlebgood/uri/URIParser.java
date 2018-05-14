@@ -24,7 +24,7 @@ public class URIParser {
     }
 
     private void parseScheme() {
-        this.uri.scheme = SchemeParser.parse(this.uri.fullUri);
+        this.uri.scheme = SchemeParser.parse(this.uri);
     }
 
     private void parseAuthority() {

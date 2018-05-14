@@ -5,7 +5,7 @@ import static io.thistlebgood.uri.URIUtils.cropToMarker;
 
 class SchemeParser {
 
-    static String parse(String fullUri) {
-        return cropToMarker(fullUri, SCHEME_MARKER);
+    static String parse(URIData uri) {
+        return cropToMarker(uri.fullUri, SCHEME_MARKER);
     }
 }
