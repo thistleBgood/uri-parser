@@ -13,7 +13,7 @@ class QueryParser {
     }
 
     static String parse(String fullUri, int startMarker) {
-        if ((startMarker < fullUri.length()) && (fullUri.substring(startMarker, startMarker+1).equals(QUERY_MARKER))) {
+        if (queryComponentIsPresent(fullUri, startMarker)) {
             String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
             int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
             if (endMarker == -1) {
@@ -24,5 +24,17 @@ class QueryParser {
         } else {
             return COMPONENT_IS_EMPTY;
         }
+    }
+
+    private static boolean queryComponentIsPresent(String fullUri, int startMarker) {
+        return optionalComponentsArePresent(fullUri, startMarker) && queryMarkerIsPresent(fullUri, startMarker);
+    }
+
+    private static boolean optionalComponentsArePresent(String fullUri, int startMarker) {
+        return startMarker < fullUri.length();
+    }
+
+    private static boolean queryMarkerIsPresent(String fullUri, int startMarker) {
+        return fullUri.substring(startMarker, startMarker+1).equals(QUERY_MARKER);
     }
 }
