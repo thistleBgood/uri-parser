@@ -12,14 +12,14 @@ public class URIParser {
 
         this.uri.fullUri = uri;
 
-        parseAllComponents();
+        parseComponentsFromFullUri();
     }
 
     URIData getURIData() {
         return this.uri;
     }
 
-    private void parseAllComponents() {
+    private void parseComponentsFromFullUri() {
         parseScheme();
         parseAuthority();
         parsePath();
