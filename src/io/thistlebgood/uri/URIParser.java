@@ -1,9 +1,5 @@
 package io.thistlebgood.uri;
 
-import static io.thistlebgood.uri.URIConstants.*;
-import static io.thistlebgood.uri.URIUtils.cropToMarker;
-import static io.thistlebgood.uri.URIUtils.optionalComponentIsPresent;
-
 public class URIParser {
     private URIData uri;
 
