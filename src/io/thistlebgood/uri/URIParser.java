@@ -31,12 +31,24 @@ public class URIParser {
         this.uri.scheme = SchemeParser.parse(this.uri.fullUri);
     }
 
-    private int getSchemeEndIndex() {
-        return this.uri.scheme.length() + SCHEME_MARKER.length();
-    }
-
     private void parseAuthority() {
         this.uri.authority = AuthorityParser.parse(this.uri.fullUri);
+    }
+
+    private void parsePath() {
+        this.uri.path = PathParser.parse(this.uri.fullUri, getPathStartIndex());
+    }
+
+    private void parseQuery() {
+        this.uri.query = QueryParser.parse(this.uri.fullUri, getPathEndIndex());
+    }
+
+    private void parseFragment() {
+        this.uri.fragment = FragmentParser.parse(this.uri.fullUri, getQueryEndIndex());
+    }
+
+    private int getSchemeEndIndex() {
+        return this.uri.scheme.length() + SCHEME_MARKER.length();
     }
 
     private int getPathStartIndex() {
@@ -49,16 +61,8 @@ public class URIParser {
         return index;
     }
 
-    private void parsePath() {
-        this.uri.path = PathParser.parse(this.uri.fullUri, getPathStartIndex());
-    }
-
     private int getPathEndIndex() {
         return getPathStartIndex() + this.uri.path.length();
-    }
-
-    private void parseQuery() {
-        this.uri.query = QueryParser.parse(this.uri.fullUri, getPathEndIndex());
     }
 
     private int getQueryEndIndex() {
@@ -67,9 +71,5 @@ public class URIParser {
             index += QUERY_MARKER.length() + this.uri.query.length();
         }
         return index;
-    }
-
-    private void parseFragment() {
-        this.uri.fragment = FragmentParser.parse(this.uri.fullUri, getQueryEndIndex());
     }
 }
