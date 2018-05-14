@@ -1,6 +1,7 @@
 package io.thistlebgood.uri;
 
 import static io.thistlebgood.uri.URIConstants.*;
+import static io.thistlebgood.uri.URIUtils.cropToMarker;
 
 public class URIParser {
     private URIData uri;
@@ -112,10 +113,5 @@ public class URIParser {
         } else {
             this.uri.fragment = COMPONENT_IS_EMPTY;
         }
-    }
-
-    private String cropToMarker(String uncropped, String marker) {
-        int endMarker = uncropped.indexOf(marker);
-        return uncropped.substring(0, endMarker);
     }
 }

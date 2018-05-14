@@ -6,4 +6,9 @@ class URIUtils {
     static boolean optionalComponentIsPresent(String component) {
         return !component.equals(COMPONENT_IS_EMPTY);
     }
+
+    static String cropToMarker(String uncropped, String marker) {
+        int endMarker = uncropped.indexOf(marker);
+        return uncropped.substring(0, endMarker);
+    }
 }
