@@ -39,6 +39,16 @@ public class URIParser {
         this.uri.authority = AuthorityParser.parse(this.uri.fullUri);
     }
 
+    private int getPathStartIndex() {
+        int index = getSchemeEndIndex();
+
+        if (this.uri.authority.length() > 0) {
+            index += AUTHORITY_MARKER.length() + this.uri.authority.length();
+        }
+
+        return index;
+    }
+
     private void parsePath() {
         int startMarker = getPathStartIndex();
 
@@ -53,16 +63,6 @@ public class URIParser {
         } else {
             this.uri.path = trimmedUri;
         }
-    }
-
-    private int getPathStartIndex() {
-        int index = getSchemeEndIndex();
-
-        if (this.uri.authority.length() > 0) {
-            index += AUTHORITY_MARKER.length() + this.uri.authority.length();
-        }
-
-        return index;
     }
 
     private int getPathEndIndex() {
