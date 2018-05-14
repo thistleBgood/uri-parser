@@ -13,17 +13,13 @@ class QueryParser {
     }
 
     static String parse(String fullUri, int startMarker) {
-        if (startMarker < fullUri.length()) {
-            if (fullUri.substring(startMarker, startMarker+1).equals(FRAGMENT_MARKER)) {
-                return COMPONENT_IS_EMPTY;
+        if ((startMarker < fullUri.length()) && (fullUri.substring(startMarker, startMarker+1).equals(QUERY_MARKER))) {
+            String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
+            int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
+            if (endMarker == -1) {
+                return trimmedUri;
             } else {
-                String trimmedUri = fullUri.substring(startMarker + QUERY_MARKER.length());
-                int endMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-                if (endMarker == -1) {
-                    return trimmedUri;
-                } else {
-                    return cropToMarker(trimmedUri, FRAGMENT_MARKER);
-                }
+                return cropToMarker(trimmedUri, FRAGMENT_MARKER);
             }
         } else {
             return COMPONENT_IS_EMPTY;
