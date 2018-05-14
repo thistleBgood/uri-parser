@@ -35,15 +35,7 @@ public class URIParser {
     }
 
     private void parseAuthority() {
-        String marker = AUTHORITY_MARKER;
-        int startMarker = this.uri.fullUri.indexOf(marker);
-
-        if (startMarker == -1) {
-            this.uri.authority = COMPONENT_IS_EMPTY;
-        } else {
-            String trimmedUri = this.uri.fullUri.substring(startMarker + marker.length());
-            this.uri.authority = cropToMarker(trimmedUri, "/");
-        }
+        this.uri.authority = AuthorityParser.parse(this.uri.fullUri);
     }
 
     private void parsePath() {
