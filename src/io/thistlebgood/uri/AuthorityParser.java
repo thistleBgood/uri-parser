@@ -9,15 +9,22 @@ import static io.thistlebgood.uri.URIUtils.hasOptionalComponent;
 class AuthorityParser {
 
     static String parse(String fullUri) {
-        String authority = COMPONENT_IS_EMPTY;
-
-        if (hasOptionalComponent(fullUri, AUTHORITY_MARKER)) {
-            int startMarker = fullUri.indexOf(AUTHORITY_MARKER);
-            String trimmedUri = fullUri.substring(startMarker + AUTHORITY_MARKER.length());
-            authority = cropToMarker(trimmedUri, PATH_MARKER);
+        if (hasAuthority(fullUri)) {
+            //This is in two stages as path marker is substring of authority marker.
+            String trimmedUri = cropToAuthorityMarker(fullUri);
+            return cropToMarker(trimmedUri, PATH_MARKER);
+        } else {
+            return COMPONENT_IS_EMPTY;
         }
+    }
 
-        return authority;
+    private static boolean hasAuthority(String fullUri) {
+        return hasOptionalComponent(fullUri, AUTHORITY_MARKER);
+    }
+
+    private static String cropToAuthorityMarker(String fullUri) {
+        int startMarker = fullUri.indexOf(AUTHORITY_MARKER);
+        return fullUri.substring(startMarker + AUTHORITY_MARKER.length());
     }
 
 }
