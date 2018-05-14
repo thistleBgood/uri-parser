@@ -19,17 +19,17 @@ class QueryParser {
 
     private static String cropAfterQuery(String trimmedUri) {
         if (hasQuery(trimmedUri)) {
-
-            trimmedUri = cropQueryMarker(trimmedUri);
-
-            if (hasFragment(trimmedUri)) {
-                return cropToMarker(trimmedUri, FRAGMENT_MARKER);
-            } else {
-                return trimmedUri;
-            }
-
+            return cropToFragment(cropQueryMarker(trimmedUri));
         } else {
             return COMPONENT_IS_EMPTY;
+        }
+    }
+
+    private static String cropToFragment(String trimmedUri) {
+        if (hasFragment(trimmedUri)) {
+            return cropToMarker(trimmedUri, FRAGMENT_MARKER);
+        } else {
+            return trimmedUri;
         }
     }
 
