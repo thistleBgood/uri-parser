@@ -27,7 +27,7 @@ public class URIParser {
     }
 
     private void parseScheme() {
-        this.uri.scheme = SchemeParser.parseScheme(this.uri.fullUri);
+        this.uri.scheme = SchemeParser.parse(this.uri.fullUri);
     }
 
     private int getSchemeEndIndex() {
