@@ -44,16 +44,14 @@ public class URIParser {
 
         String trimmedUri = this.uri.fullUri.substring(startMarker);
         int queryMarker = trimmedUri.indexOf(QUERY_MARKER);
+        int fragmentMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
 
         if (indexFound(queryMarker)) {
             this.uri.path = cropToMarker(trimmedUri, QUERY_MARKER);
+        } else if (indexFound(fragmentMarker)) {
+            this.uri.path = cropToMarker(trimmedUri, FRAGMENT_MARKER);
         } else {
-            int fragmentMarker = trimmedUri.indexOf(FRAGMENT_MARKER);
-            if (indexFound(fragmentMarker)) {
-                this.uri.path = cropToMarker(trimmedUri, FRAGMENT_MARKER);
-            } else {
-                this.uri.path = trimmedUri;
-            }
+            this.uri.path = trimmedUri;
         }
     }
 
