@@ -7,6 +7,10 @@ import static io.thistlebgood.uri.URIUtils.hasOptionalComponent;
 
 class PathParser {
 
+    static void parse(URIData uri) {
+        uri.path = parse(uri.fullUri, URIIndexer.getPathStartIndex(uri));
+    }
+
     static String parse(String fullUri, int startMarker) {
         return cropAfterPath(cropBeforePath(fullUri, startMarker));
     }

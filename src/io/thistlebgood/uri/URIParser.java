@@ -32,7 +32,7 @@ public class URIParser {
     }
 
     private void parsePath() {
-        this.uri.path = PathParser.parse(this.uri.fullUri, getPathStartIndex());
+        PathParser.parse(this.uri);
     }
 
     private void parseQuery() {
@@ -41,10 +41,6 @@ public class URIParser {
 
     private void parseFragment() {
         this.uri.fragment = FragmentParser.parse(this.uri.fullUri, getQueryEndIndex());
-    }
-
-    private int getPathStartIndex() {
-        return URIIndexer.getPathStartIndex(this.uri);
     }
 
     private int getPathEndIndex() {
