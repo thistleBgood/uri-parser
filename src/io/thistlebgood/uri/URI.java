@@ -20,8 +20,7 @@ public class URI {
     }
 
     public URI(String uri) {
-        URIParser parser = new URIParser(uri);
-        this.uri = parser.getURIData();
+        this.uri = new URIParser(uri).getURIData();
     }
 
     @Override
